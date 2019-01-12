@@ -14,6 +14,17 @@ it pulls all tickers data into a single sheet (to ensure a fair use of the API),
 - you should now have a menu item called `CryptoPrice`. Click on it, then click on `Update`
 - you can now use the plugin anywhere like this : `=CRYPTOPRICE("ETH", "btc_price")`
 
+### how to use
+- paste this in any cell : `=CRYPTOPRICE("ETH", "btc_price")` (you can discover the available data in the `data` sheet)
+
+### update data
+- first, click on the menu item `CryptoPrice`, then click on `Update` (will refresh raw data)
+- to refresh your calls in other sheets, the best way i found is adding a dummy reference in the formula like this :
+
+`=CRYPTOPRICE("ETH", "btc_price", $A$1)`
+
+and updating the `$A$1` cell with whatever data.
+
 ### limitations
 - can give you data in USD/BTC/ETH (according to what CoinPaprika is providing)
 - won't give you any specific exchange data
