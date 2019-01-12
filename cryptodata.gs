@@ -1,11 +1,11 @@
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
-  ui.createMenu('CryptoPrice')
-      .addItem('Update', 'CRYPTOPRICEALLJSON')
+  ui.createMenu('CryptoData')
+      .addItem('Update', 'CRYPTODATAJSON')
   .addToUi();
 }
 
-function CRYPTOPRICE(symbol, colName) {
+function CRYPTODATA(symbol, colName) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheets = ss.getSheets();
   var sheet = ss.getSheetByName("data");
@@ -33,7 +33,7 @@ function CRYPTOPRICE(symbol, colName) {
   }
 }
 
-function CRYPTOPRICEALLJSON() {
+function CRYPTODATAJSON() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheets = ss.getSheets();
   var sheet = ss.getSheetByName("data");
