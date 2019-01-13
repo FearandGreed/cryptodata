@@ -15,7 +15,18 @@ it pulls all tickers data into a single sheet (to ensure a fair use of the API),
 - you can now use the plugin anywhere like this : `=CRYPTODATA("ETH"; "btc_price")`
 
 ### how to use
-- paste this in any cell : `=CRYPTODATA("ETH"; "btc_price")` (you can discover the available data in the `data` sheet)
+
+##### get data for a specific coin :
+
+`=CRYPTODATA("ETH"; "btc_price")` (you can discover the available data in the `data` sheet)
+
+##### get global data :
+
+`=CRYPTODATAGLOBAL("bitcoin_dominance_percentage")`
+
+see all available properties here : https://api.coinpaprika.com/#tag/Global/paths/~1global/get
+
+##### troubleshooting
 
 -> You might need to change the `;` in the formula by `,`
 
@@ -34,10 +45,9 @@ Another way to find data with better performance (but poor readability) :
 ### limitations
 - can give you data in USD/BTC/ETH (according to what CoinPaprika is providing)
 - won't give you any specific exchange data
-- won't give you global market data like total marketcap (possible but not yet implemented)
 - should respect CoinPaprika API fair use since it pull all data in one API call (rate limit is 10 reqs/s), but since request come from google's servers, i can't guarantee the fair use
 - for now CoinPaprika's API is free, i can't guarantee it won't change
-- performances are not great, but it does the job (remember, it's free)
+- performances might not be great, but it does the job (remember, it's free)
 
 ### improve it
 - i'm  welcoming issues, forks and PR, feel free to do better than what i did and if you do, share it !

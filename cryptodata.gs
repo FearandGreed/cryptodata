@@ -29,6 +29,24 @@ function CRYPTODATA(symbol, colName) {
   }
 }
 
+function CRYPTODATAGLOBAL(colName) {
+  var response = UrlFetchApp.fetch("https://api.coinpaprika.com/v1/global", {muteHttpExceptions: true});
+  if (response.getResponseCode() == 429)
+  {
+    return "too many requests";
+  }
+  else if (response.getResponseCode() != 200)
+  {
+    return "server error";
+  }
+  var w = JSON.parse(response.getContentText());
+  if (w.hasOwnProperty(colName)) {
+    return w[colName];
+  } else {
+    return "property not found";
+  }
+}
+
 function CRYPTODATACOINDETAILS(coin_id, colName) {
   var param = encodeURI(coin_id);
   var response = UrlFetchApp.fetch("https://api.coinpaprika.com/v1/coins/" + param, {muteHttpExceptions: true});
