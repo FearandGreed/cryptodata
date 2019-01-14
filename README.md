@@ -40,7 +40,7 @@ and updating the `$A$1` cell with whatever data.
 
 Another way to find data with better performance (but poor readability) :
 
-`=INDEX(data!$A$1:$Z; MATCH("ETH"; data!$C$1:$C; 0); MATCH("btc_price"; data!$A$1:$1; 0))`
+`=INDEX(data!$A$1:$ZZ; MATCH("ETH"; data!$C$1:$C; 0); MATCH("btc_price"; data!$A$1:$1; 0))`
 
 ### limitations
 - can give you data in USD/BTC/ETH (according to what CoinPaprika is providing)
