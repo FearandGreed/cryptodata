@@ -49,24 +49,53 @@ function CRYPTODATAGLOBAL(colName) {
 
 function CRYPTODATACOINDETAILS(coin_id, colName) {
   var param = encodeURI(coin_id);
-  var response = UrlFetchApp.fetch("https://api.coinpaprika.com/v1/coins/" + param, {muteHttpExceptions: true});
-  if (response.getResponseCode() == 404)
+
+  if(colName.indexOf("/") !== -1)
   {
-    return "coin_id not found";
+    var res = colName.split("/");
+    var quote = res[0];
+    var property = res[1];
+    var response = UrlFetchApp.fetch("https://api.coinpaprika.com/v1/tickers/" + param + "?quotes=" + quote, {muteHttpExceptions: true});
+    if (response.getResponseCode() == 404)
+    {
+      return "coin_id not found";
+    }
+    else if (response.getResponseCode() == 429)
+    {
+      return "too many requests";
+    }
+    else if (response.getResponseCode() != 200)
+    {
+      return "server error";
+    }
+    var w = JSON.parse(response.getContentText());
+    if (w['quotes'][quote].hasOwnProperty(property)) {
+      return w['quotes'][quote][property];
+    } else {
+      return "property not found";
+    }
   }
-  else if (response.getResponseCode() == 429)
+  else
   {
-    return "too many requests";
-  }
-  else if (response.getResponseCode() != 200)
-  {
-    return "server error";
-  }
-  var w = JSON.parse(response.getContentText());
-  if (w.hasOwnProperty(colName)) {
-    return w[colName];
-  } else {
-    return "property not found";
+    var response = UrlFetchApp.fetch("https://api.coinpaprika.com/v1/coins/" + param, {muteHttpExceptions: true});
+    if (response.getResponseCode() == 404)
+    {
+      return "coin_id not found";
+    }
+    else if (response.getResponseCode() == 429)
+    {
+      return "too many requests";
+    }
+    else if (response.getResponseCode() != 200)
+    {
+      return "server error";
+    }
+    var w = JSON.parse(response.getContentText());
+    if (w.hasOwnProperty(colName)) {
+      return w[colName];
+    } else {
+      return "property not found";
+    }
   }
 }
 
