@@ -143,7 +143,8 @@ function CRYPTODATAJSON() {
     "eth_percent_change_1y",
     "eth_ath_price",
     "eth_ath_date",
-    "eth_percent_from_price_ath"
+    "eth_percent_from_price_ath",
+    "last_updated"
   ]);
 
   for (i = 0; i < dataSet.length; i++) {
@@ -197,8 +198,9 @@ function CRYPTODATAJSON() {
       data.quotes['ETH'].percent_change_1y,
       data.quotes['ETH'].ath_price,
       data.quotes['ETH'].ath_date,
-      data.quotes['ETH'].percent_from_price_ath
-    ]); //your JSON entities here
+      data.quotes['ETH'].percent_from_price_ath,
+      data.last_updated
+    ]);
   }
 
   dataRange = sheet.getRange(1, 1, rows.length, rows[0].length);
