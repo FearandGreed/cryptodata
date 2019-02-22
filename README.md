@@ -7,12 +7,14 @@ a lighter and free alternative to the excellent [CryptoFinance](https://cryptofi
 it pulls all tickers data into a single sheet (to ensure a fair use of the API), then a `CRYPTODATA("symbol"; "data")` function allows you to pull specific data for ay coin.
 
 ### how to install
-- open your favorite crypto spreadsheet, and create a sheet named `data`
+- open your favorite crypto spreadsheet, and create an *empty* sheet named `data`
 - go to the menu `Tools > Script Editor`
 - paste the content of the file `cryptodata.gs` into the editor, then save
 - go back to your spreadsheet, refresh the page
 - you should now have a menu item called `CryptoData`. Click on it, then click on `Update`
 - you can now use the plugin anywhere like this : `=CRYPTODATA("ETH"; "btc_price")`
+
+:heavy_exclamation_mark: do not use the `data` sheet, it's used by the script, create a new one if you want to use the script data
 
 ### how to use
 
