@@ -22,6 +22,15 @@ it pulls all tickers data into a single sheet (to ensure a fair use of the API),
 
 `=CRYPTODATA("ETH"; "btc_price")` (you can discover the available data in the `data` sheet)
 
+##### get historical data for a specific coin :
+
+`=CRYPTODATAHISTORY("<coin>"; "<date>"; "<type of data>"; "<quote>")` with params being :
+
+* coin : a single coin ticket like "ETH" or "BTC" or "XMR"
+* date : something like "2018-02-20"
+* type of data : can be "price", "volume_24h" or "market_cap"
+* quote : optional, defaults to usd, but can be set to "usd" or "btc"
+
 ##### get global data :
 
 `=CRYPTODATAGLOBAL("bitcoin_dominance_percentage")`

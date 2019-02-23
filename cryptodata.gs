@@ -29,6 +29,53 @@ function CRYPTODATA(symbol, colName) {
   }
 }
 
+function CRYPTODATAHISTORY(symbol, date, type, quote) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheets = ss.getSheets();
+  var sheet = ss.getSheetByName("data");
+  var data = sheet.getDataRange().getValues();
+  var col = data[0].indexOf('id');
+  if (col != -1) {
+    var row = -1;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i][2] == symbol) {
+        row = i;
+        break;
+      }
+    }
+    if (row != -1) {
+      if(!quote)
+      {
+       var quote = "usd";
+      }
+      var coinId = data[row][col];
+      if(date instanceof Date) var date = date.toISOString();
+
+      var response = UrlFetchApp.fetch("https://api.coinpaprika.com/v1/tickers/"+coinId+"/historical?start="+date+"&interval=5m&limit=1&quote="+quote, {muteHttpExceptions: true});
+      if (response.getResponseCode() == 429)
+      {
+        return "too many requests";
+      }
+      else if (response.getResponseCode() != 200)
+      {
+        return "server error";
+      }
+
+      var w = JSON.parse(response.getContentText());
+      if (w[0].hasOwnProperty(type)) {
+        return w[0][type];
+      } else {
+        return "price not found";
+      }
+
+    } else {
+      return "symbol not found";
+    }
+  } else {
+    return "datatype not found";
+  }
+}
+
 function CRYPTODATAGLOBAL(colName) {
   var response = UrlFetchApp.fetch("https://api.coinpaprika.com/v1/global", {muteHttpExceptions: true});
   if (response.getResponseCode() == 429)
